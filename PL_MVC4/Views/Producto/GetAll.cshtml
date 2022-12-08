@@ -1,0 +1,57 @@
+﻿@model ML.Producto
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Prodcutos</h2>
+
+<div class="container">
+
+
+    <div class="row">
+        <div style="float:right">
+            @Html.ActionLink("Agregar", "Form", "Producto", htmlAttributes: new { @class = "btn btn-success" })
+        </div>
+    </div>
+
+    <div class="row">
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th>Editar</th>
+                    <th>IdProducto</th>
+                    <th>Nombre</th>
+                    <th>Precio Unitario</th>
+                    <th>Stock</th>
+                    <th>IdProovedor</th>
+                    <th>IdDepartamento</th>
+                    <th>Descripcion</th>
+
+
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach(ML.Producto producto in Model.Productos)
+            {
+                <tr>
+                    <td class="text-center"><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("Form", "Producto", new { IdProducto = producto.IdProducto})"></a></td>
+
+
+                    <td>@producto.IdProducto</td>
+                    <td>@producto.Nombre</td>
+                    <td>@producto.PrecioUnitario</td>
+                    <td>@producto.Stock</td>
+                    <td>@producto.Proveedor.Nombre</td>
+                    <td>@producto.Departamento.Nombre</td>
+                    <td>@producto.Descripcion</td>
+
+                    <td class="text-center"><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Producto", new { IdProducto = producto.IdProducto })" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"></a></td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+
