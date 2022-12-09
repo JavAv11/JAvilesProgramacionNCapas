@@ -56,10 +56,8 @@ namespace PL_MVC4.Controllers
 
                 if (result.Correct)
                 {
-                    departamento = (ML.Departamento)result.Object;
+                    departamento = (ML.Departamento)result.[0];
                     departamento.Area.Areas = resultArea.Objects;
-                    
-
                 }
                 else
                 {
