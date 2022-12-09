@@ -29,6 +29,10 @@ namespace BL
                             departamento.IdDepartamento = obj.IdDepartamento;
                             departamento.Nombre = obj.Nombre;
 
+                            departamento.Area = new ML.Area();
+                            departamento.Area.IdArea = obj.IdArea.Value;
+                            departamento.Area.Nombre = obj.NombreArea;
+
                             result.Objects.Add(departamento);
 
                         }
@@ -180,6 +184,51 @@ namespace BL
             }
             return result;
 
+        }
+
+        public static ML.Result DepartamentoGetByArea(int IdArea)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (DL_EF.JAvilesProgramacionNCapasEntities context = new DL_EF.JAvilesProgramacionNCapasEntities())
+                {
+                    //var query = context.Departamentos.FromSqlRaw($"DepartamentoGetByArea {IdArea}").AsEnumerable().ToList();
+                    var query = context.DepartamentoGetByArea(IdArea).ToList();
+                    result.Objects = new List<object>();
+                    if (query != null)
+                    {
+
+                        foreach (var obj in query)
+                        {
+                            ML.Departamento departamento = new ML.Departamento();
+
+                            departamento.IdDepartamento = obj.IdDepartamento;
+                            departamento.Nombre = obj.Nombre;
+
+                            departamento.Area = new ML.Area();
+                            departamento.Area.IdArea = obj.IdArea.Value;
+                            departamento.Area.Nombre = obj.NombreArea;
+
+                            result.Objects.Add(departamento);
+                        }
+
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                        result.ErrorMessage = "No se ha podido realizar la consulta";
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ErrorMessage = ex.Message;
+            }
+            return result;
         }
     }
 }
