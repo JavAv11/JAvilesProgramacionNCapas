@@ -67,8 +67,8 @@ namespace BL
                     result.Objects = new List<object>();
                     if (departamentos != null)
                     {
-
                         ML.Departamento departamento = new ML.Departamento();
+
                         departamento.IdDepartamento = departamentos.IdDepartamento;
                         departamento.Nombre = departamentos.Nombre;
 
@@ -76,9 +76,7 @@ namespace BL
                         departamento.Area.IdArea = departamentos.IdArea.Value;
                         departamento.Area.Nombre = departamentos.NombreArea;
 
-
-                        result.Objects.Add(departamento);
-
+                        result.Object = departamento;
                         result.Correct = true;
                     }
                     else

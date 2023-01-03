@@ -56,12 +56,13 @@ namespace PL_MVC4.Controllers
 
                 if (result.Correct)
                 {
-                    departamento = (ML.Departamento)result.[0];
+                    departamento = (ML.Departamento)result.Object;
                     departamento.Area.Areas = resultArea.Objects;
                 }
                 else
                 {
                     ViewBag.Message = "Ocurrio un error al consultar el Usuario seleccionado";
+                    return PartialView("Modal");
                 }
                 return View(departamento);
             }
